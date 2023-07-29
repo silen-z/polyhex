@@ -1,0 +1,19 @@
+{
+    "name": "silenz/polyhex-cycleorm",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Polyhex\\Integration\\CycleORM\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pavel Hrách",
+            "email": "pavel@hrach.email"
+        }
+    ],
+    "require": {
+        "cycle/orm": "^2.2",
+        "cycle/annotated": "^3.2"
+    }
+}

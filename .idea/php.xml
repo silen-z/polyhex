@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/example-app/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/example-app/vendor/sentry/sentry" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-http/client-common" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-http/message" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/example-app/vendor/laminas/laminas-diactoros" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-di/php-di" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/roadrunner-http" />
+      <path value="$PROJECT_DIR$/example-app/vendor/http-interop/http-factory-guzzle" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-di/phpdoc-reader" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-di/invoker" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/core" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/roadrunner-worker" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/tokenizer" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/attributes" />
+      <path value="$PROJECT_DIR$/example-app/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/pagination" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/logger" />
+      <path value="$PROJECT_DIR$/example-app/vendor/composer" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/example-app/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/example-app/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/example-app/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/example-app/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/example-app/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/example-app/vendor/laminas/laminas-httphandlerrunner" />
+      <path value="$PROJECT_DIR$/example-app/vendor/tracy/tracy" />
+      <path value="$PROJECT_DIR$/example-app/vendor/yiisoft/friendly-exception" />
+      <path value="$PROJECT_DIR$/example-app/vendor/cycle/annotated" />
+      <path value="$PROJECT_DIR$/example-app/vendor/cycle/database" />
+      <path value="$PROJECT_DIR$/example-app/vendor/cycle/schema-builder" />
+      <path value="$PROJECT_DIR$/example-app/vendor/cycle/orm" />
+      <path value="$PROJECT_DIR$/example-app/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/example-app/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/example-app/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/example-app/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/example-app/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/example-app/vendor/clue/stream-filter" />
+      <path value="$PROJECT_DIR$/example-app/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-http/discovery" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/example-app/vendor/php-http/message-factory" />
+      <path value="$PROJECT_DIR$/example-app/vendor/spiral/goridge" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+</project>

@@ -1,0 +1,34 @@
+{
+  "name": "silenz/polyhex-web",
+  "autoload": {
+    "psr-4": {
+      "Polyhex\\Web\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Pavel Hrách",
+      "email": "pavel@hrach.email"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../polyhex"
+    }
+  ],
+  "require": {
+    "silenz/polyhex": "dev-main",
+    "psr/http-factory": "^1.0",
+    "psr/http-message": "^1.0",
+    "psr/http-server-handler": "^1.0",
+    "laminas/laminas-diactoros": "^2.22",
+    "laminas/laminas-httphandlerrunner": "^2.4",
+    "nikic/fast-route": "^1.3"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "vimeo/psalm": "^5.7"
+  }
+}

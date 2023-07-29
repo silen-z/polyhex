@@ -1,0 +1,18 @@
+{
+    "name": "silenz/polyhex-reactphp",
+    "require": {
+        "react/http": "1.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Polyhex\\Integration\\ReactPHP\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pavel Hrách",
+            "email": "pavel@hrach.email"
+        }
+    ],
+    "minimum-stability": "dev"
+}

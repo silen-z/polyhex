@@ -1,0 +1,21 @@
+{
+  "name": "silenz/movie-app-example-plugin",
+  "type": "example-app-plugin",
+  "autoload": {
+    "psr-4": {
+      "Silenz\\App\\Plugin\\Example\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Pavel Hrách",
+      "email": "pavel@hrach.email"
+    }
+  ],
+  "require": {},
+  "extra": {
+    "example-app-plugin": {
+      "extension-class": "Silenz\\App\\Plugin\\Example\\ExamplePluginExtension"
+    }
+  }
+}

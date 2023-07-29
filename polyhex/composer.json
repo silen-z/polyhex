@@ -1,0 +1,25 @@
+{
+  "name": "silenz/polyhex",
+  "autoload": {
+    "psr-4": {
+      "Polyhex\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Pavel Hrách",
+      "email": "pavel@hrach.email"
+    }
+  ],
+  "require": {
+    "php-di/php-di": "7.0.0-beta3",
+    "tracy/tracy": "^2.9",
+    "psr/event-dispatcher": "^1.0",
+    "symfony/event-dispatcher": "^6.2"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "vimeo/psalm": "^5.7"
+  }
+}

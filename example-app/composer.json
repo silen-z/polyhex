@@ -1,0 +1,36 @@
+{
+  "name": "silenz/example-app",
+  "autoload": {
+    "psr-4": {
+      "SilenZ\\App\\": "./src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Pavel Hrách",
+      "email": "pavel@hrach.email"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../*"
+    }
+  ],
+  "require": {
+    "silenz/polyhex": "dev-main",
+    "silenz/polyhex-web": "dev-main",
+    "silenz/polyhex-roadrunner": "dev-main",
+    "silenz/polyhex-cycleorm": "dev-main",
+    "silenz/movie-app-example-plugin": "dev-main",
+    "sentry/sdk": "^3.3",
+    "silenz/polyhex-reactphp": "dev-main"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
+  }
+}
