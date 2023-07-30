@@ -4,7 +4,6 @@ namespace SilenZ\App;
 
 use Polyhex\Application\BuildConfig;
 use Polyhex\Application\Builder;
-use Polyhex\Integration\RoadRunner\RoadRunnerApplication;
 use Psr\Http\Message\ServerRequestInterface;
 use Sentry\ClientBuilder;
 use Sentry\SentrySdk;
@@ -13,30 +12,37 @@ use Sentry\State\HubInterface;
 final class Application
 {
 
-    public static function runWeb(): void
+    public static function create(): \Polyhex\Web\WebApplication
     {
         $sentryHub = self::initSentry();
 
-        $app = \Polyhex\Web\Application::builder()
+        return \Polyhex\Web\WebApplication::builder()
             ->use(...self::extensions())
             ->with_config([ HubInterface::class => $sentryHub ])
             ->with_config(...self::configs(Environment::Development))
             ->build(self::buildConfig(Environment::Development, false));
-
-        $app->run($app->requestFromGlobals());
     }
 
-    public static function runRoadRunner(): never
+    public static function createRoadRunner(): \Polyhex\Integration\RoadRunner\RoadRunnerApplication
     {
         $sentryHub = self::initSentry();
 
-        $app = RoadRunnerApplication::builder()
+        return \Polyhex\Integration\RoadRunner\RoadRunnerApplication::builder()
             ->use(...self::extensions())
             ->with_config([ HubInterface::class => $sentryHub ])
             ->with_config(...self::configs(Environment::Development))
             ->build(self::buildConfig(Environment::Development, false));
+    }
 
-        $app->run();
+    public static function createReactPHP(): \Polyhex\Integration\ReactPHP\ReactPHPApplication
+    {
+        $sentryHub = self::initSentry();
+
+        return \Polyhex\Integration\ReactPHP\ReactPHPApplication::builder()
+            ->use(...self::extensions())
+            ->with_config([ HubInterface::class => $sentryHub ])
+            ->with_config(...self::configs(Environment::Development))
+            ->build(self::buildConfig(Environment::Development, false));
     }
 
     private static function initSentry(): HubInterface

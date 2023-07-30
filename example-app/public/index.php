@@ -2,4 +2,6 @@
 
 require __DIR__ . "/../vendor/autoload.php";
 
-\SilenZ\App\Application::runWeb();
+$app = \SilenZ\App\Application::create();
+
+$app->run();

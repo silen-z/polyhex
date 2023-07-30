@@ -5,23 +5,26 @@ declare(strict_types=1);
 namespace Polyhex\Application;
 
 use DI\ContainerBuilder;
-use Polyhex\Application\Extension\CoreExtension;
+use Polyhex\Application;
 
 /**
+ * @template T
  * @psalm-api
  */
-abstract class Builder
+final class Builder
 {
     private ContainerBuilder $container_builder;
 
     /** @var string[] */
     private array $registered_extensions = [];
 
-    /** @psalm-api */
-    public function __construct()
+    /** 
+     * @param class-string<T> $applicationClass
+     * @psalm-api
+     */
+    public function __construct(private string $applicationClass, private array $params = [])
     {
         $this->container_builder = new ContainerBuilder();
-        $this->use(new CoreExtension());
     }
 
     /** @psalm-api */
@@ -56,7 +59,7 @@ abstract class Builder
      * @psalm-api
      * @throws \Exception
      */
-    public function build_container(BuildConfig $config): \DI\Container
+    public function build(BuildConfig $config): Application
     {
         $this->container_builder->addDefinitions([
             ...$config->parameters,
@@ -70,7 +73,9 @@ abstract class Builder
 
         $this->container_builder->useAutowiring(true);
 
-        return $this->container_builder->build();
+        $container = $this->container_builder->build();
+
+        return $container->make($this->applicationClass, $this->params);
     }
 
 }

@@ -7,7 +7,7 @@ run-roadrunner:
     ./rr -c example-app/rr.yaml serve
 
 run-reactphp:
-    php example-app/reactphp_entry.php
+    php example-app/entry_reactphp.php
 
 check:
     vendor/bin/psalm

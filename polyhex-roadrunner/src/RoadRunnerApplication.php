@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Polyhex\Integration\RoadRunner;
 
+use Polyhex\Application;
+use Polyhex\Application\Builder;
+use Polyhex\Application\Extension\CoreExtension;
 use Polyhex\Web\ErrorHandler;
+use Polyhex\Web\WebExtension;
 use Psr\Http\Server\RequestHandlerInterface;
 use Spiral\RoadRunner\Http\PSR7Worker;
+use DI;
 
 /**
  * @api
  */
-final class RoadRunnerApplication
+final class RoadRunnerApplication implements Application
 {
 
     /**
@@ -41,9 +46,10 @@ final class RoadRunnerApplication
         }
     }
 
-    public static function builder(): RoadRunnerBuilder
+    public static function builder(): Builder
     {
-        return new RoadRunnerBuilder();
+        return (new Builder(self::class, [ 'handler' => DI\get(WebExtension::HANDLER) ]))
+            ->use(new CoreExtension(), new WebExtension(), new RoadRunnerExtension());
     }
 
 }

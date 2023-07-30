@@ -2,4 +2,6 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
-\SilenZ\App\Application::runRoadRunner();
+$app = \SilenZ\App\Application::createReactPHP();
+
+$app->run();

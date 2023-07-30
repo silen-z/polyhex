@@ -1,7 +1,7 @@
 version: '3'
 
 server:
-  command: "php roadrunner_entry.php"
+  command: "php entry_roadrunner.php"
 
 http:
   address: 0.0.0.0:8080

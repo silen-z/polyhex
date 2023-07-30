@@ -9,15 +9,19 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
-use Polyhex\Application\Event\ApplicationStarted;
+use Polyhex\Application\Event;
 use Nyholm\Psr7Server\ServerRequestCreator;
+use Polyhex\Application;
+use Polyhex\Application\Builder;
+use Polyhex\Application\Extension;
 use Polyhex\Web\ErrorHandler;
 use Throwable;
+use DI;
 
 /**
  * @api
  */
-final class Application
+final class WebApplication implements Application
 {
 
     /**
@@ -34,8 +38,9 @@ final class Application
     ) {
     }
 
-    public function run(ServerRequestInterface $request): void
+    public function run(ServerRequestInterface|null $request = null): void
     {
+        $request ??= $this->requestFromGlobals();
         // $context = TransactionContext::fromHeaders(
         //     $request->getHeader('sentry-trace')[0] ?? '',
         //     $request->getHeader('baggage')[0] ?? '',
@@ -48,7 +53,7 @@ final class Application
         // $this->hub->setSpan($transaction);
 
         $this->logger->info('application started');
-        $this->dispatcher->dispatch(new ApplicationStarted());
+        $this->dispatcher->dispatch(new Event\ApplicationStarted());
 
         // $handleContext = new \Sentry\Tracing\SpanContext();
         // $handleContext->setOp('http.request.handle');
@@ -78,9 +83,10 @@ final class Application
         return $this->requestCreator->fromGlobals();
     }
 
-    public static function builder(): WebBuilder
+    public static function builder(): Builder
     {
-        return new WebBuilder();
+        return (new Builder(self::class, [ 'handler' => DI\get(WebExtension::HANDLER) ]))
+            ->use(new Extension\CoreExtension(), new WebExtension());
     }
 
 }
