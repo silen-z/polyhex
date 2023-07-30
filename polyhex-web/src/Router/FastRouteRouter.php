@@ -22,19 +22,17 @@ final class FastRouteRouter implements RequestHandlerInterface
     public const ROUTES = "web.FastRouteRouter.routes";
     public const ROUTER_OPTIONS = 'web.FastRouteRouter.options';
 
-    private FastRoute\Dispatcher $dispatcher;
+    private FastRoute\Dispatcher|null $dispatcher = null;
 
     public function __construct(
         private HandlerResolver $handlerResolver,
-        callable $routes,
-        array $options = [],
-    ) {
-        $this->dispatcher = FastRoute\cachedDispatcher($routes, $options);
-    }
+        private array $routes,
+        private array $options = [],
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $match = $this->dispatcher->dispatch($request->getMethod(), $request->getUri()->getPath());
+        $match = $this->getDispatcher()->dispatch($request->getMethod(), $request->getUri()->getPath());
 
         if ($match[0] === FastRoute\Dispatcher::NOT_FOUND) {
             throw new NotFound($request->getUri()->getPath());
@@ -52,12 +50,21 @@ final class FastRouteRouter implements RequestHandlerInterface
 
     public static function defineRoutes(callable $define): array
     {
-        return [
-            self::ROUTES => DI\decorate(fn (callable $original) => function($r) use ($original, $define) {
-                $original($r);
-                $define($r);
-            }),
-        ];
+        return [ self::ROUTES => DI\add(\DI\value($define)) ];
+    }
+
+    private function getDispatcher(): FastRoute\Dispatcher
+    {
+        if ($this->dispatcher === null) {
+            $defineRoutes = function($collector) {
+                foreach ($this->routes as $routeCallback) {
+                    $routeCallback($collector);
+                }
+            };
+            $this->dispatcher = FastRoute\cachedDispatcher($defineRoutes, $this->options);
+        }
+
+        return $this->dispatcher;
     }
 
 }

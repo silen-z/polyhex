@@ -39,7 +39,7 @@ final class WebExtension implements Extension
         if ($this->router === 'FastRoute') {
             $builder->with_config([
                 // Routing
-                \Polyhex\Web\Router\FastRouteRouter::ROUTES => \DI\value(function () {}),
+                \Polyhex\Web\Router\FastRouteRouter::ROUTES => [],
                 \Polyhex\Web\Router\FastRouteRouter::ROUTER_OPTIONS => ['cacheFile' => '', 'cacheDisabled' => true],
 
                 WebExtension::ROUTER => \DI\autowire(\Polyhex\Web\Router\FastRouteRouter::class)

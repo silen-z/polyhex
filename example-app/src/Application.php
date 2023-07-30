@@ -63,6 +63,8 @@ final class Application
 
     private static function configs(Environment $env): iterable
     {
+        yield require(__DIR__ . "/../config/config.php");
+
         if ($env === Environment::Development) {
             yield require(__DIR__ . '/../config/environment/development.php');
         }
@@ -70,8 +72,6 @@ final class Application
         if ($env === Environment::Production) {
             yield require(__DIR__ . '/../config/environment/production.php');
         }
-
-        yield require(__DIR__ . "/../config/config.php");
     }
 
     public static function buildConfig(Environment $env, bool $debugMode): BuildConfig

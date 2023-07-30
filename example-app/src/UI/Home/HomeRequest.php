@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace SilenZ\App\UI\Home;
 
-use Polyhex\Web\Handler\ExtractedRequest;
-use Polyhex\Web\Routing\QueryParam;
+use Polyhex\Web\Request\ExtractedRequest;
+use Polyhex\Web\Request\Extractor;
 
 final class HomeRequest extends ExtractedRequest
 {
 
     public function __construct(
-        #[QueryParam('lang')]
+        #[Extractor\QueryParam('lang')]
         public string $language = 'en',
     )
     {
