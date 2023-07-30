@@ -6,7 +6,6 @@ namespace Polyhex\Web;
 
 use Polyhex\Application\BuildConfig;
 use Polyhex\Application\Builder;
-use Polyhex\Integration\RoadRunner\RoadRunnerApplication;
 
 /**
  * @api
@@ -23,7 +22,9 @@ final class WebBuilder extends Builder
     public function build(BuildConfig $config): Application
     {
         /** @var Application $application */
-        $application = $this->build_container($config)->make(Application::class);
+        $application = $this->build_container($config)->make(Application::class, [
+            'handler' => \DI\get(WebExtension::HANDLER),
+        ]);
 
         return $application;
     }

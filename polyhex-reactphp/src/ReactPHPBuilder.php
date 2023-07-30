@@ -24,7 +24,9 @@ final class ReactPHPBuilder extends Builder
     public function build(BuildConfig $config): ReactPHPApplication
     {
         /** @var ReactPHPApplication $application */
-        $application = $this->build_container($config)->make(ReactPHPApplication::class);
+        $application = $this->build_container($config)->make(ReactPHPApplication::class,[
+            'handler' => \DI\get(WebExtension::HANDLER),
+        ]);
 
         return $application;
     }

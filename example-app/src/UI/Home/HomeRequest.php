@@ -12,7 +12,7 @@ final class HomeRequest extends ExtractedRequest
 
     public function __construct(
         #[QueryParam('lang')]
-        public string $language,
+        public string $language = 'en',
     )
     {
     }

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Polyhex\Integration\ReactPHP;
 
-use Psr\Http\Message\ResponseFactoryInterface;
+use Polyhex\Web\ErrorHandler;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Throwable;
 
 /**
  * @api
@@ -19,6 +20,7 @@ final class ReactPHPApplication
      */
     public function __construct(
         private RequestHandlerInterface $handler,
+        private ErrorHandler $errorHandler,
     )
     {
     }
@@ -28,14 +30,7 @@ final class ReactPHPApplication
      */
     public function run(): void
     {
-        $http = new \React\Http\HttpServer(function ($request) {
-            try {
-                return $this->handler->handle($request);
-            } catch (\Throwable $e) {
-                dump($e->getMessage());
-                dumpe($e->getTrace()[0]);
-            }
-        });
+        $http = new \React\Http\HttpServer($this->handle(...));
         $socket = new \React\Socket\SocketServer('0.0.0.0:8080');
         $http->listen($socket);
     }
@@ -43,6 +38,14 @@ final class ReactPHPApplication
     public static function builder(): ReactPHPBuilder
     {
         return new ReactPHPBuilder();
+    }
+
+    private function handle(ServerRequestInterface $request): ResponseInterface {
+        try {
+            return $this->handler->handle($request);
+        } catch (\Throwable $e) {
+            return $this->errorHandler->handleError($e);
+        }
     }
 
 }

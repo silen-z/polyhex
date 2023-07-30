@@ -6,29 +6,40 @@ namespace Polyhex\Web;
 
 use Polyhex\Application\Builder;
 use Polyhex\Application\Extension;
+use Polyhex\Web\Handler\DefaultErrorHandler;
+use Polyhex\Web\ErrorHandler;
 
 final class WebExtension implements Extension
 {
+    public const HANDLER = 'web.handler';
+
     public const ROUTER = 'web.router';
     public const ROUTER_OPTIONS = 'web.router.options';
-
-    public const DISPATCHER = 'web.dispatcher';
 
     public function register(Builder $builder): void
     {
         $builder->with_config([
-            \Psr\Http\Message\ResponseFactoryInterface::class => \DI\create(\Laminas\Diactoros\ResponseFactory::class),
+            \Nyholm\Psr7\Factory\Psr17Factory::class => \DI\create(),
+
+            // PSR factories
+            \Psr\Http\Message\ServerRequestFactoryInterface::class => \DI\get(\Nyholm\Psr7\Factory\Psr17Factory::class),
+            \Psr\Http\Message\UriFactoryInterface::class => \DI\get(\Nyholm\Psr7\Factory\Psr17Factory::class),
+            \Psr\Http\Message\UploadedFileFactoryInterface::class => \DI\get(\Nyholm\Psr7\Factory\Psr17Factory::class),
+            \Psr\Http\Message\StreamFactoryInterface::class => \DI\get(\Nyholm\Psr7\Factory\Psr17Factory::class),
+            \Psr\Http\Message\ResponseFactoryInterface::class => \DI\get(\Nyholm\Psr7\Factory\Psr17Factory::class),
+
+            // Response emitter
             \Laminas\HttpHandlerRunner\Emitter\EmitterInterface::class => \DI\create(\Laminas\HttpHandlerRunner\Emitter\SapiEmitter::class),
 
+            // Routing
             WebExtension::ROUTER_OPTIONS => ['cacheFile' => '', 'cacheDisabled' => true],
             WebExtension::ROUTER => \DI\autowire(\Polyhex\Web\Routing\Router::class)
                 ->constructorParameter('options', \DI\get(WebExtension::ROUTER_OPTIONS)),
 
-            /** @psalm-suppress InvalidArgument */
-            WebExtension::DISPATCHER => \DI\factory([WebExtension::ROUTER, 'build']),
+            ErrorHandler::class => \DI\autowire(DefaultErrorHandler::class),
 
-            Application::class => \DI\autowire()
-                ->constructor(\DI\get(WebExtension::DISPATCHER)),
+            /** @psalm-suppress InvalidArgument */
+            WebExtension::HANDLER => \DI\factory([WebExtension::ROUTER, 'build']),
         ]);
     }
 }

@@ -17,15 +17,13 @@ final class Application
     {
         $sentryHub = self::initSentry();
 
-        $request = \Polyhex\Web\Application::requestFromGlobals();
-
-        $app =  \Polyhex\Web\Application::builder()
+        $app = \Polyhex\Web\Application::builder()
             ->use(...self::extensions())
             ->with_config([ HubInterface::class => $sentryHub ])
             ->with_config(...self::configs(Environment::Development))
             ->build(self::buildConfig(Environment::Development, false));
 
-        $app->run($request);
+        $app->run($app->requestFromGlobals());
     }
 
     public static function runRoadRunner(): never

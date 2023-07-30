@@ -24,7 +24,9 @@ final class RoadRunnerBuilder extends Builder
     public function build(BuildConfig $config): RoadRunnerApplication
     {
         /** @var RoadRunnerApplication $application */
-        $application = $this->build_container($config)->make(RoadRunnerApplication::class);
+        $application = $this->build_container($config)->make(RoadRunnerApplication::class, [
+            'handler' => \DI\get(WebExtension::HANDLER),
+        ]);
 
         return $application;
     }
