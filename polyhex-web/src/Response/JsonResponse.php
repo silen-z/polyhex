@@ -2,18 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Polyhex\Web\Routing;
+namespace Polyhex\Web\Response;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Polyhex\Web\Handler\IntoResponse;
 
 final class JsonResponse implements IntoResponse
 {
 
-    public function __construct(private mixed $payload, private int $code = 200)
-    {
-    }
+    public function __construct(private mixed $payload, private int $code = 200) {}
 
     public function intoResponse(ResponseFactoryInterface $response_factory): ResponseInterface
     {

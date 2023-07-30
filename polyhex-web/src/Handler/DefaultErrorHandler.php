@@ -2,7 +2,6 @@
 
 namespace Polyhex\Web\Handler;
 
-use Polyhex\Web\ErrorHandler;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;

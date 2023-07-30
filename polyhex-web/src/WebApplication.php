@@ -13,8 +13,8 @@ use Polyhex\Application\Event;
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Polyhex\Application;
 use Polyhex\Application\Builder;
-use Polyhex\Application\Extension;
-use Polyhex\Web\ErrorHandler;
+use Polyhex\Application\Extension\CoreExtension;
+use Polyhex\Web\Handler\ErrorHandler;
 use Throwable;
 use DI;
 
@@ -86,7 +86,7 @@ final class WebApplication implements Application
     public static function builder(): Builder
     {
         return (new Builder(self::class, [ 'handler' => DI\get(WebExtension::HANDLER) ]))
-            ->use(new Extension\CoreExtension(), new WebExtension());
+            ->use(new CoreExtension(), new WebExtension());
     }
 
 }

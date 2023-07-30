@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Polyhex\Web\Handler;
+namespace Polyhex\Web\Request;
 
+use Polyhex\Web\Request\Extractor\Extractor;
 use Psr\Http\Message\ServerRequestInterface;
 
 abstract class ExtractedRequest implements FromServerRequest
@@ -12,6 +13,8 @@ abstract class ExtractedRequest implements FromServerRequest
     public static function fromRequest(ServerRequestInterface $request): self
     {
         $ref = new \ReflectionClass(static::class);
+
+        /** @var static $instance */
         $instance = $ref->newInstanceWithoutConstructor();
 
         foreach ($ref->getProperties() as $property) {

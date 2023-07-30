@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Polyhex\Web\Handler;
+namespace Polyhex\Web\Response;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;

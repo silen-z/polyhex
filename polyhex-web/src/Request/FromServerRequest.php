@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Polyhex\Web\Handler;
+namespace Polyhex\Web\Request;
 
 use Psr\Http\Message\ServerRequestInterface;
 

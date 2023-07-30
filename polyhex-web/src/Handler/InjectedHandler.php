@@ -12,13 +12,14 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Polyhex\Web\Request\FromServerRequest;
 use ReflectionFunction;
 use ReflectionIntersectionType;
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionUnionType;
 
-final class Handler implements RequestHandlerInterface
+final class InjectedHandler implements RequestHandlerInterface
 {
 
     /** @var callable(mixed...): ResponseInterface|IntoResponse */

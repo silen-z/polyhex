@@ -1,20 +1,21 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Polyhex\Web;
 
 use Polyhex\Application\Builder;
 use Polyhex\Application\Extension;
 use Polyhex\Web\Handler\DefaultErrorHandler;
-use Polyhex\Web\ErrorHandler;
+use Polyhex\Web\Handler\ErrorHandler;
+use Polyhex\Web\Handler\DefaultHandlerResolver;
+use Polyhex\Web\Handler\HandlerResolver;
 
 final class WebExtension implements Extension
 {
+    public function __construct(private string|null $router = 'FastRoute') {}
+
     public const HANDLER = 'web.handler';
 
     public const ROUTER = 'web.router';
-    public const ROUTER_OPTIONS = 'web.router.options';
 
     public function register(Builder $builder): void
     {
@@ -31,15 +32,22 @@ final class WebExtension implements Extension
             // Response emitter
             \Laminas\HttpHandlerRunner\Emitter\EmitterInterface::class => \DI\create(\Laminas\HttpHandlerRunner\Emitter\SapiEmitter::class),
 
-            // Routing
-            WebExtension::ROUTER_OPTIONS => ['cacheFile' => '', 'cacheDisabled' => true],
-            WebExtension::ROUTER => \DI\autowire(\Polyhex\Web\Routing\Router::class)
-                ->constructorParameter('options', \DI\get(WebExtension::ROUTER_OPTIONS)),
-
             ErrorHandler::class => \DI\autowire(DefaultErrorHandler::class),
-
-            /** @psalm-suppress InvalidArgument */
-            WebExtension::HANDLER => \DI\factory([WebExtension::ROUTER, 'build']),
+            HandlerResolver::class => \DI\autowire(DefaultHandlerResolver::class),
         ]);
+
+        if ($this->router === 'FastRoute') {
+            $builder->with_config([
+                // Routing
+                \Polyhex\Web\Router\FastRouteRouter::ROUTES => \DI\value(function () {}),
+                \Polyhex\Web\Router\FastRouteRouter::ROUTER_OPTIONS => ['cacheFile' => '', 'cacheDisabled' => true],
+
+                WebExtension::ROUTER => \DI\autowire(\Polyhex\Web\Router\FastRouteRouter::class)
+                    ->constructorParameter('routes', \DI\get(\Polyhex\Web\Router\FastRouteRouter::ROUTES))
+                    ->constructorParameter('options', \DI\get(\Polyhex\Web\Router\FastRouteRouter::ROUTER_OPTIONS)),
+
+                WebExtension::HANDLER => \DI\get(WebExtension::ROUTER),
+            ]);
+        }
     }
 }

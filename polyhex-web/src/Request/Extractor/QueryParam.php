@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Polyhex\Web\Routing;
+namespace Polyhex\Web\Request\Extractor;
 
 use Attribute;
-use Psr\Http\Message\ServerRequestInterface;
 use ReflectionProperty;
-use Polyhex\Web\Handler\Extractor;
+use Psr\Http\Message\ServerRequestInterface;
 
 #[Attribute]
 class QueryParam implements Extractor

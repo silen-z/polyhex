@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Polyhex\Web\Routing;
+namespace Polyhex\Web\Router;
 
 final class MethodNotAllowed extends \Exception
 {
